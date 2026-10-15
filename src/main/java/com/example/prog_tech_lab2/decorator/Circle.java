@@ -1,9 +1,7 @@
-package com.example.prog_tech_lab2.task1;
-
-import com.example.prog_tech_lab2.Shape;
+package com.example.prog_tech_lab2.decorator;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
+import com.example.prog_tech_lab2.Shape;
 public class Circle extends Shape {
     private final double radius;
 
