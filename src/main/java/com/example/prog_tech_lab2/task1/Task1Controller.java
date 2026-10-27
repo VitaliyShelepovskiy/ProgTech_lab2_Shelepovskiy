@@ -14,14 +14,15 @@ import javafx.stage.Stage;
 public class Task1Controller {
 
     @FXML private Canvas canvas;
-    @FXML private ColorPicker FillColorPicker;
-    @FXML private ColorPicker StrokeColorPicker;
+    @FXML private ColorPicker colorpicker;
+    @FXML private ColorPicker fillPicker;
     @FXML private TextField tfSize;
     @FXML private Label lblInfo;
 
     @FXML
     public void initialize() {
-        FillColorPicker.setValue(Color.LIGHTBLUE);
+        colorpicker.setValue(Color.BLACK);        // цвет контура
+        fillPicker.setValue(Color.LIGHTBLUE);     // цвет заливки
         tfSize.setText("100");
     }
 
@@ -34,6 +35,8 @@ public class Task1Controller {
     private double cy() { return canvas.getHeight() / 2; }
 
     private void show(Shape s) {
+        s.setFillColor(fillPicker.getValue());
+        s.setStrokeWidth(2);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         s.draw(gc);
@@ -42,24 +45,37 @@ public class Task1Controller {
     }
 
     @FXML public void onCircle(ActionEvent e) {
-        show(new Circle(FillColorPicker.getValue(),StrokeColorPicker.getValue(), cx(), cy(), getSize() / 2));
+        show(new Circle(colorpicker.getValue(), cx(), cy(), getSize() / 2));
     }
+
     @FXML public void onEllipse(ActionEvent e) {
-        show(new Ellipse(FillColorPicker.getValue(),StrokeColorPicker.getValue(), cx(), cy(), getSize() / 2, getSize() / 4));
+        show(new Ellipse(colorpicker.getValue(), cx(), cy(), getSize() / 2, getSize() / 4));
     }
+
     @FXML public void onRectangle(ActionEvent e) {
-        show(new Rectangle(FillColorPicker.getValue(),StrokeColorPicker.getValue(), cx(), cy(), getSize(), getSize() / 2));
+        show(new Rectangle(colorpicker.getValue(), cx(), cy(), getSize(), getSize() / 2));
     }
+
     @FXML public void onRoundedRectangle(ActionEvent e) {
-        show(new RoundedRectangle(FillColorPicker.getValue(),StrokeColorPicker.getValue(), cx(), cy(), getSize(), getSize() / 2, 25));
+        show(new RoundedRectangle(colorpicker.getValue(), cx(), cy(), getSize(), getSize() / 2, 25));
     }
+
     @FXML public void onSquare(ActionEvent e) {
-        show(new Square(FillColorPicker.getValue(),StrokeColorPicker.getValue(), cx(), cy(), getSize() / 2));
+        show(new Square(colorpicker.getValue(), cx(), cy(), getSize() / 2));
     }
 
     @FXML
     public void goToTask2(ActionEvent e) throws Exception {
+        switchScene(e, "/task2.fxml");
+    }
+
+    @FXML
+    public void goToTask4(ActionEvent e) throws Exception {
+        switchScene(e, "/task4.fxml");
+    }
+
+    private void switchScene(ActionEvent e, String fxml) throws Exception {
         Stage stage = (Stage) ((Button) e.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(new FXMLLoader(getClass().getResource("/task2.fxml")).load(), 900, 650));
+        stage.setScene(new Scene(new FXMLLoader(getClass().getResource(fxml)).load(), 900, 650));
     }
 }

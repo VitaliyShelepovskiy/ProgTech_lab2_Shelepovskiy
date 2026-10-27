@@ -7,24 +7,38 @@ import javafx.scene.paint.Color;
 public class Ellipse extends Shape {
     private final double rx, ry;
 
-    public Ellipse(Color fillColor,Color strokeColor, double x, double y, double rx, double ry) {
-        super(fillColor, strokeColor,x, y);
+    public Ellipse(Color strokeColor, double x, double y, double rx, double ry) {
+        super(strokeColor, x, y);
         this.rx = rx;
         this.ry = ry;
     }
 
-    @Override
-    public double area() { return Math.PI * rx * ry; }
+    @Override public double area() { return Math.PI * rx * ry; }
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.setFill(getFillColor());
+        if (getFillColor() != Color.TRANSPARENT) {
+            gc.setFill(getFillColor());
+            gc.fillOval(x - rx, y - ry, rx * 2, ry * 2);
+        }
         gc.setStroke(getStrokeColor());
         gc.setLineWidth(getStrokeWidth());
-        gc.fillOval(x - rx, y - ry, rx * 2, ry * 2);
         gc.strokeOval(x - rx, y - ry, rx * 2, ry * 2);
     }
 
     @Override
-    public String discriptor() { return "Ellipse"; }
+    public boolean contains(double mx, double my) {
+        double dx = (mx - x) / rx, dy = (my - y) / ry;
+        return dx * dx + dy * dy <= 1;
+    }
+
+    @Override
+    public Shape copy() {
+        Ellipse e = new Ellipse(getStrokeColor(), getX(), getY(), rx, ry);
+        e.setFillColor(getFillColor());
+        e.setStrokeWidth(getStrokeWidth());
+        return e;
+    }
+
+    @Override public String discriptor() { return "Ellipse"; }
 }

@@ -26,6 +26,10 @@
          <font>
             <Font size="14.0" />
          </font></Button>
+        <Button text="→ Task 4" onAction="#goToTask4">
+            <font>
+                <Font size="14.0" />
+            </font></Button>
       <VBox.margin>
          <Insets left="10.0" top="10.0" />
       </VBox.margin>

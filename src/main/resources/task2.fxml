@@ -1,97 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ColorPicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox prefHeight="650" prefWidth="900" spacing="8" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.prog_tech_lab2.task2.Task2Controller">
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.prog_tech_lab2.task2.Task2Controller"
+      spacing="8" prefWidth="900" prefHeight="650">
 
-    <HBox alignment="CENTER_LEFT" spacing="8">
-        <Label text="Task 2: Factory Method — логические элементы">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <VBox.margin>
-         <Insets left="10.0" top="10.0" />
-      </VBox.margin>
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Label text="Task 2: Factory Method — логические элементы"/>
     </HBox>
 
-    <HBox alignment="CENTER_LEFT" spacing="8">
-        <Label text="Номер элемента (0..4):">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-        <TextField fx:id="tfNumber" prefWidth="70">
-         <font>
-            <Font size="14.0" />
-         </font></TextField>
-      <Label text="Цвет контура :">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <ColorPicker fx:id="StrokeColorPicker" />
-      <Label text="Цвет заливки :">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <ColorPicker fx:id="FillColorPicker" />
-        <Button onAction="#onDraw" text="Выполнить">
-         <font>
-            <Font size="14.0" />
-         </font></Button>
-      <VBox.margin>
-         <Insets left="10.0" top="10.0" />
-      </VBox.margin>
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Label text="Номер элемента (0..4):"/>
+        <TextField fx:id="tfNumber" prefWidth="70"/>
+        <Label text="Контур:"/>
+        <ColorPicker fx:id="colorpicker"/>
+        <Label text="Заливка:"/>
+        <ColorPicker fx:id="fillPicker"/>
+        <Button text="Выполнить" onAction="#onDraw">
+
+        </Button>
     </HBox>
 
-    <HBox alignment="CENTER_LEFT" spacing="20">
-        <Label text="0 — OR">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-        <Label text="1 — NOR">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-        <Label text="2 — NAND">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-        <Label text="3 — AND">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-        <Label prefHeight="20.0" prefWidth="67.0" text="4 — NOT">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <VBox.margin>
-         <Insets left="10.0" top="10.0" />
-      </VBox.margin>
+    <HBox spacing="20" alignment="CENTER_LEFT">
+        <Label text="0 — OR"/>
+        <Label text="1 — NOR"/>
+        <Label text="2 — NAND"/>
+        <Label text="3 — AND"/>
+        <Label text="4 — NOT"/>
     </HBox>
 
     <HBox spacing="8">
-        <Button onAction="#goToTask1" text="← Task 1">
-         <font>
-            <Font size="14.0" />
-         </font></Button>
-        <Button onAction="#goToTask3" text="→ Task 3">
-         <font>
-            <Font size="14.0" />
-         </font></Button>
-      <VBox.margin>
-         <Insets left="10.0" top="10.0" />
-      </VBox.margin>
+        <Button text="← Task 1" onAction="#goToTask1"/>
+        <Button text="→ Task 3" onAction="#goToTask3"/>
+        <Button text="→ Task 4" onAction="#goToTask4"/>
     </HBox>
 
-    <Canvas fx:id="canvas" height="520" width="880" />
-    <Label fx:id="lblInfo" text="Элемент: -" />
+    <Canvas fx:id="canvas" width="880" height="520"/>
+    <Label fx:id="lblInfo" text="Элемент: -"/>
 </VBox>

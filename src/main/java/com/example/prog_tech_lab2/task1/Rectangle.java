@@ -8,8 +8,8 @@ public class Rectangle extends Shape {
     protected double length;
     protected double width;
 
-    public Rectangle(Color fillColor, Color strokeColor, double x, double y, double length, double width) {
-        super(fillColor,strokeColor, x, y);
+    public Rectangle(Color strokeColor, double x, double y, double length, double width) {
+        super(strokeColor, x, y);
         this.length = length;
         this.width = width;
     }
@@ -18,10 +18,12 @@ public class Rectangle extends Shape {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.setFill(getFillColor());
+        if (getFillColor() != Color.TRANSPARENT) {
+            gc.setFill(getFillColor());
+            gc.fillRect(x - length / 2, y - width / 2, length, width);
+        }
         gc.setStroke(getStrokeColor());
         gc.setLineWidth(getStrokeWidth());
-        gc.fillRect(x - length / 2, y - width / 2, length, width);
         gc.strokeRect(x - length / 2, y - width / 2, length, width);
     }
 
@@ -32,5 +34,12 @@ public class Rectangle extends Shape {
     }
 
     @Override
-    public String discriptor() { return "Rectangle"; }
+    public Shape copy() {
+        Rectangle r = new Rectangle(getStrokeColor(), getX(), getY(), length, width);
+        r.setFillColor(getFillColor());
+        r.setStrokeWidth(getStrokeWidth());
+        return r;
+    }
+
+    @Override public String discriptor() { return "Rectangle"; }
 }

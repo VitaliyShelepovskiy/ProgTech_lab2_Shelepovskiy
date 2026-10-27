@@ -30,14 +30,17 @@ public class Task3Controller {
 
     @FXML
     public void initialize() {
-        // стартовый набор фигур — используем классы из Task 1
-        shapes.add(new Rectangle(Color.BLACK, Color.RED, 150, 150, 100, 80));
-        shapes.add(new Circle(Color.BLACK, Color.RED, 400, 200, 45));
-        shapes.add(new Rectangle(Color.BLACK, Color.RED, 650, 150, 120, 80));
-        shapes.add(new Circle(Color.BLACK, Color.RED,250, 400, 45));
+        shapes.add(new Rectangle(Color.BLACK, 150, 150, 100, 80));
+        shapes.get(0).setFillColor(Color.LIGHTBLUE);
+        shapes.add(new Circle(Color.BLACK, 400, 200, 45));
+        shapes.get(1).setFillColor(Color.LIGHTYELLOW);
+        shapes.add(new Rectangle(Color.BLACK, 650, 150, 120, 80));
+        shapes.get(2).setFillColor(Color.LIGHTPINK);
+        shapes.add(new Circle(Color.BLACK, 250, 400, 45));
+        shapes.get(3).setFillColor(Color.LIGHTGREEN);
 
-        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, this::onBegin);
-        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::onDrag);
+        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED,  this::onBegin);
+        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED,  this::onDrag);
         canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, this::onEnd);
 
         redraw();
@@ -53,7 +56,10 @@ public class Task3Controller {
     public void onBegin(MouseEvent e) {
         Shape hit = null;
         for (int i = shapes.size() - 1; i >= 0; i--) {
-            if (shapes.get(i).contains(e.getX(), e.getY())) { hit = shapes.get(i); break; }
+            if (shapes.get(i).contains(e.getX(), e.getY())) {
+                hit = shapes.get(i);
+                break;
+            }
         }
         if (hit == null) return;
 
@@ -62,7 +68,6 @@ public class Task3Controller {
         caretaker.push(temp);
         temp.initState();
 
-        // наверх по z-order
         shapes.remove(hit);
         shapes.add(hit);
 
@@ -72,16 +77,16 @@ public class Task3Controller {
 
     public void onDrag(MouseEvent e) {
         if (temp == null || dragging == null) return;
-        dragging.setPosition(e.getX(), e.getY());
+        dragging.relocate(e.getX(), e.getY());
         redraw();
     }
 
     public void onEnd(MouseEvent e) {
         if (temp == null) return;
-        // восстановить свойства из снимка
         dragging.setStrokeWidth(temp.getWidth());
+        dragging.setStrokeColor(temp.getStrokeColor());
         dragging.setFillColor(temp.getFillColor());
-        dragging.setPosition(e.getX(), e.getY());
+        dragging.relocate(e.getX(), e.getY());
         temp = null;
         dragging = null;
         redraw();
@@ -94,21 +99,22 @@ public class Task3Controller {
         if (m == null) { lblInfo.setText("Снимков нет"); return; }
         Shape s = m.getState();
         s.setStrokeWidth(m.getWidth());
+        s.setStrokeColor(m.getStrokeColor());
         s.setFillColor(m.getFillColor());
-        s.setPosition(m.getX(), m.getY());
+        s.relocate(m.getX(), m.getY());
         redraw();
         lblInfo.setText("Восстановлено. Осталось снимков: " + caretaker.size());
     }
 
     @FXML
-    public void goToTask1(ActionEvent e) throws Exception {
-        Stage stage = (Stage) ((Button) e.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(new FXMLLoader(getClass().getResource("/task1.fxml")).load(), 900, 650));
-    }
-
+    public void goToTask1(ActionEvent e) throws Exception { switchScene(e, "/task1.fxml"); }
     @FXML
-    public void goToTask2(ActionEvent e) throws Exception {
+    public void goToTask2(ActionEvent e) throws Exception { switchScene(e, "/task2.fxml"); }
+    @FXML
+    public void goToTask4(ActionEvent e) throws Exception { switchScene(e, "/task4.fxml"); }
+
+    private void switchScene(ActionEvent e, String fxml) throws Exception {
         Stage stage = (Stage) ((Button) e.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(new FXMLLoader(getClass().getResource("/task2.fxml")).load(), 900, 650));
+        stage.setScene(new Scene(new FXMLLoader(getClass().getResource(fxml)).load(), 900, 650));
     }
 }

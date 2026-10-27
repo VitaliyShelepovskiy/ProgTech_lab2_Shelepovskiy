@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.prog_tech_lab2.task4.Task4Controller"
+      spacing="8" prefWidth="1200" prefHeight="750">
+
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Label text="Task 4: Графический редактор"/>
+        <Label text="| Инструменты:"/>
+        <Button text="✏ Карандаш"  onAction="#toolPencil"/>
+        <Button text="／ Линия"     onAction="#toolLine"/>
+        <Button text="◯ Эллипс"    onAction="#toolEllipse"/>
+        <Button text="▭ Прямоуг."  onAction="#toolRect"/>
+        <Button text="✥ Тащить"    onAction="#toolDrag"/>
+    </HBox>
+
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Label text="Логические:"/>
+        <Button text="OR"   onAction="#logicOr"/>
+        <Button text="NOR"  onAction="#logicNor"/>
+        <Button text="NAND" onAction="#logicNand"/>
+        <Button text="AND"  onAction="#logicAnd"/>
+        <Button text="NOT"  onAction="#logicNot"/>
+    </HBox>
+
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Label text="Заливка:"/>
+        <ColorPicker fx:id="fillPicker"/>
+        <Label text="Контур:"/>
+        <ColorPicker fx:id="strokePicker"/>
+        <Label text="Толщина:"/>
+        <TextField fx:id="tfStrokeWidth" prefWidth="50"/>
+        <Button text="Удалить"  onAction="#onDelete"/>
+        <Button text="Undo"     onAction="#onUndo"/>
+        <Button text="Очистить" onAction="#onClear"/>
+    </HBox>
+
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Button text="← Task 1" onAction="#goToTask1"/>
+        <Button text="← Task 2" onAction="#goToTask2"/>
+        <Button text="← Task 3" onAction="#goToTask3"/>
+        <Label fx:id="lblTool" text="Инструмент: -"/>
+    </HBox>
+
+    <Canvas fx:id="canvas" width="1180" height="560"/>
+    <Label fx:id="lblInfo" text="Готово"/>
+</VBox>
