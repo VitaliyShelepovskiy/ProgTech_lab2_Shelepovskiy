@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.vectoreditor.ChristmasTree.ChristmasTreeController"
+      spacing="8" prefWidth="900" prefHeight="750">
+
+
+
+    <HBox spacing="20" alignment="CENTER_LEFT">
+
+        <Button text="Lights"    onAction="#addLights"/>
+        <Button text="Ornaments" onAction="#addOrnaments"/>
+        <Button text="Presents"  onAction="#addPresents"/>
+        <Button text="Star"      onAction="#addStar"/>
+        <Button text="Add All"   onAction="#addAll"/>
+        <Button text="Reset"     onAction="#onReset"/>
+
+    </HBox>
+
+    <Pane fx:id="paintPane" prefWidth="820" prefHeight="600">
+
+    </Pane>
+
+    <Label fx:id="lblStatus" text="Ёлка"/>
+
+
+</VBox>

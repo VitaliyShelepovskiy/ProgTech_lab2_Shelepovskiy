@@ -1,0 +1,74 @@
+@startuml
+class com.example.vectoreditor.ChristmasTree.Garland {
+- {static} Color[] PALETTE
++ void draw(Pane)
++ String decorate()
+}
+
+
+class com.example.vectoreditor.ChristmasTree.Ornaments {
+- {static} Color[] COLORS
++ void draw(Pane)
+- boolean insideTriangle(double,double,double,double,double,double,double,double)
+- double sign(double,double,double,double,double,double)
++ String decorate()
+}
+
+
+interface com.example.vectoreditor.ChristmasTree.ChristmasTree {
+~ void draw(Pane)
+~ String decorate()
+}
+
+class com.example.vectoreditor.ChristmasTree.Star {
++ void draw(Pane)
++ String decorate()
+}
+
+class com.example.vectoreditor.ChristmasTree.Presents {
+- {static} Color[] BOX_COLORS
++ void draw(Pane)
++ String decorate()
+}
+
+
+class com.example.vectoreditor.ChristmasTree.ChristmasTreeImpl {
++ void draw(Pane)
+- Polygon branch(double,double,double,double,double,Color)
++ String decorate()
+}
+
+class com.example.vectoreditor.ChristmasTree.ChristmasTreeController {
+- Pane paintPane
+- Label lblStatus
+- ChristmasTree tree
+- TreeDecorator dtree
++ void initialize(URL,ResourceBundle)
+- void redraw()
+- void updateStatus()
++ void addLights(ActionEvent)
++ void addOrnaments(ActionEvent)
++ void addPresents(ActionEvent)
++ void addStar(ActionEvent)
++ void addAll(ActionEvent)
++ void onReset(ActionEvent)
+}
+
+
+abstract class com.example.vectoreditor.ChristmasTree.TreeDecorator {
+# ChristmasTree tree
++ void draw(Pane)
++ String decorate()
+}
+
+
+
+
+com.example.vectoreditor.ChristmasTree.TreeDecorator <|-- com.example.vectoreditor.ChristmasTree.Garland
+com.example.vectoreditor.ChristmasTree.TreeDecorator <|-- com.example.vectoreditor.ChristmasTree.Ornaments
+com.example.vectoreditor.ChristmasTree.TreeDecorator <|-- com.example.vectoreditor.ChristmasTree.Star
+com.example.vectoreditor.ChristmasTree.TreeDecorator <|-- com.example.vectoreditor.ChristmasTree.Presents
+com.example.vectoreditor.ChristmasTree.ChristmasTree <|.. com.example.vectoreditor.ChristmasTree.ChristmasTreeImpl
+javafx.fxml.Initializable <|.. com.example.vectoreditor.ChristmasTree.ChristmasTreeController
+com.example.vectoreditor.ChristmasTree.ChristmasTree <|.. com.example.vectoreditor.ChristmasTree.TreeDecorator
+@enduml

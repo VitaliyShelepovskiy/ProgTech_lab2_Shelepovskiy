@@ -1,0 +1,10 @@
+package com.example.vectoreditor.ChristmasTree;
+
+
+import javafx.scene.layout.Pane;
+
+public interface ChristmasTree {
+    void draw(Pane pane);
+    String decorate();
+
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.vectoreditor.VectorEditor.VectorEditorController"
+      spacing="8" prefWidth="1200" prefHeight="760">
+
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Label text="Vector Editor (Decorator)"/>
+        <Label text="| Инструменты:"/>
+        <Button text="⬠ Полигон" onAction="#toolPolygon">
+            <tooltip><Tooltip text="Кликами задайте вершины, затем «Готово»"/></tooltip>
+        </Button>
+        <Button text="• Точка" onAction="#toolPoint">
+            <tooltip><Tooltip text="Растровая точка"/></tooltip>
+        </Button>
+        <Button text="◯ Круг" onAction="#toolCircle">
+            <tooltip><Tooltip text="Растровый круг"/></tooltip>
+        </Button>
+        <Button text="▢ Квадрат" onAction="#toolSquare">
+            <tooltip><Tooltip text="Растровый квадрат"/></tooltip>
+        </Button>
+        <Button text="▭ Прямоуг." onAction="#toolRect">
+            <tooltip><Tooltip text="Растровый прямоугольник"/></tooltip>
+        </Button>
+        <Button text="✥ Тащить" onAction="#toolDrag">
+            <tooltip><Tooltip text="Выделить и перетащить фигуру"/></tooltip>
+        </Button>
+    </HBox>
+
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Label text="Заливка:"/><ColorPicker fx:id="fillPicker"/>
+        <Label text="Контур:"/><ColorPicker fx:id="strokePicker"/>
+        <Label text="Толщина:"/><TextField fx:id="tfStrokeWidth" prefWidth="50"/>
+        <Label text="Тень:"/><ColorPicker fx:id="shadowPicker"/>
+        <Label text="Смещение тени:"/><TextField fx:id="tfShadowOffset" prefWidth="50"/>
+    </HBox>
+
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Label text="Декораторы для выделенного полигона:"/>
+        <Button text="+ Заливка" onAction="#onApplyFill">
+            <tooltip><Tooltip text="Применить FillDecorator"/></tooltip>
+        </Button>
+        <Button text="+ Контур" onAction="#onApplyBorder">
+            <tooltip><Tooltip text="Применить BorderDecorator"/></tooltip>
+        </Button>
+        <Button text="+ Тень" onAction="#onApplyShadow">
+            <tooltip><Tooltip text="Применить ShadowDecorator"/></tooltip>
+        </Button>
+        <Button text="Готово (полигон)" onAction="#onFinishPolygon">
+            <tooltip><Tooltip text="Завершить создание полигона"/></tooltip>
+        </Button>
+        <Button text="Удалить" onAction="#onDelete"/>
+        <Button text="Undo" onAction="#onUndo"/>
+        <Button text="Очистить" onAction="#onClear"/>
+    </HBox>
+
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <Button text="ChristmasTree" onAction="#goToChristmasTree"/>
+        <Label fx:id="lblTool" text="Инструмент: -"/>
+    </HBox>
+
+    <Canvas fx:id="canvas" width="1180" height="560"/>
+    <Label fx:id="lblInfo" text="Готово"/>
+</VBox>

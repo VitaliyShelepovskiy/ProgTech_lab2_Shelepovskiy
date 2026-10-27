@@ -1,0 +1,196 @@
+@startuml
+abstract class com.example.vectoreditor.VectorEditor.Shape {
+# Color fillColor
+# Color strokeColor
+# double strokeWidth
++ {abstract}void draw(GraphicsContext)
++ {abstract}boolean contains(double,double)
++ {abstract}void relocate(double,double)
++ {abstract}double getX()
++ {abstract}double getY()
++ {abstract}String descriptor()
++ {abstract}Shape copy()
++ Color getFillColor()
++ void setFillColor(Color)
++ Color getStrokeColor()
++ void setStrokeColor(Color)
++ double getStrokeWidth()
++ void setStrokeWidth(double)
+}
+
+
+class com.example.vectoreditor.VectorEditor.MemoSelect {
+- Deque<Memento> stack
++ void push(Memento)
++ Memento poll()
++ int size()
++ void clear()
+}
+
+
+class com.example.vectoreditor.VectorEditor.VectorEditorController {
+- Canvas canvas
+- ColorPicker fillPicker
+- ColorPicker strokePicker
+- ColorPicker shadowPicker
+- TextField tfStrokeWidth
+- TextField tfShadowOffset
+- Label lblInfo
+- Label lblTool
+- Tool currentTool
+- List<Shape> shapes
+- MemoSelect caretaker
+- Polygon polygonInProgress
+- Shape selected
+- Shape dragging
+- double dragOffsetX
+- boolean dragMoved
++ void initialize()
+- double sw()
+- double shadowOffset()
+- Color fillColor()
+- void updateToolLabel()
+- Shape unwrap(Shape)
+- boolean isReadyPolygon(Shape)
++ void toolPolygon(ActionEvent)
++ void toolPoint(ActionEvent)
++ void toolCircle(ActionEvent)
++ void toolSquare(ActionEvent)
++ void toolRect(ActionEvent)
++ void toolDrag(ActionEvent)
++ void onPress(MouseEvent)
++ void onDrag(MouseEvent)
++ void onRelease(MouseEvent)
+- Shape hitTest(double,double)
++ void onFinishPolygon(ActionEvent)
+- int indexOfSelected()
++ void onApplyFill(ActionEvent)
++ void onApplyBorder(ActionEvent)
++ void onApplyShadow(ActionEvent)
++ void onDelete(ActionEvent)
++ void onUndo(ActionEvent)
++ void onClear(ActionEvent)
+- void redraw()
++ void goToChristmasTree(ActionEvent)
+}
+
+
+class com.example.vectoreditor.VectorEditor.Polygon {
+- List<double[]> vertices
++ void addVertex(double,double)
++ List<double[]> getVertices()
++ int size()
++ double getX()
++ double getY()
++ void draw(GraphicsContext)
++ boolean contains(double,double)
++ void relocate(double,double)
++ String descriptor()
++ Shape copy()
+}
+
+
+class com.example.vectoreditor.VectorEditor.BorderDecorator {
+- Color color
+- double width
++ void setColor(Color)
++ void setWidth(double)
++ Color getColor()
++ double getBorderWidth()
++ void draw(GraphicsContext)
++ String descriptor()
++ Shape copy()
+}
+
+
+class com.example.vectoreditor.VectorEditor.Main {
++ void start(Stage)
++ {static} void main(String[])
+}
+
+class com.example.vectoreditor.VectorEditor.RasterShape {
+- Kind kind
+- double x
+- double size
++ Kind getKind()
++ void draw(GraphicsContext)
++ boolean contains(double,double)
++ void relocate(double,double)
++ double getX()
++ double getY()
++ String descriptor()
++ Shape copy()
+}
+
+
+enum com.example.vectoreditor.VectorEditor.Kind {
++  POINT
++  CIRCLE
++  SQUARE
++  RECT
+}
+
+abstract class com.example.vectoreditor.VectorEditor.ShapeDecorator {
+# Shape wrapped
++ Shape getWrapped()
++ void draw(GraphicsContext)
++ boolean contains(double,double)
++ void relocate(double,double)
++ double getX()
++ double getY()
++ String descriptor()
++ Shape copy()
++ Color getFillColor()
++ void setFillColor(Color)
++ Color getStrokeColor()
++ void setStrokeColor(Color)
++ double getStrokeWidth()
++ void setStrokeWidth(double)
+}
+
+
+class com.example.vectoreditor.VectorEditor.ShadowDecorator {
+- double offsetX
+- double offsetY
+- Color shadowColor
++ void draw(GraphicsContext)
++ String descriptor()
++ Shape copy()
+}
+
+
+class com.example.vectoreditor.VectorEditor.FillDecorator {
+- Color color
++ void setColor(Color)
++ Color getColor()
++ void draw(GraphicsContext)
++ String descriptor()
++ Shape copy()
+}
+
+
+class com.example.vectoreditor.VectorEditor.Memento {
+- List<Shape> snapshot
++ List<Shape> getSnapshot()
+}
+
+
+enum com.example.vectoreditor.VectorEditor.Tool {
++  POLYGON
++  POINT
++  CIRCLE
++  SQUARE
++  RECT
++  DRAG
+}
+
+
+
+com.example.vectoreditor.VectorEditor.Shape <|-- com.example.vectoreditor.VectorEditor.Polygon
+com.example.vectoreditor.VectorEditor.ShapeDecorator <|-- com.example.vectoreditor.VectorEditor.BorderDecorator
+javafx.application.Application <|-- com.example.vectoreditor.VectorEditor.Main
+com.example.vectoreditor.VectorEditor.Shape <|-- com.example.vectoreditor.VectorEditor.RasterShape
+com.example.vectoreditor.VectorEditor.Shape <|-- com.example.vectoreditor.VectorEditor.ShapeDecorator
+com.example.vectoreditor.VectorEditor.ShapeDecorator <|-- com.example.vectoreditor.VectorEditor.ShadowDecorator
+com.example.vectoreditor.VectorEditor.ShapeDecorator <|-- com.example.vectoreditor.VectorEditor.FillDecorator
+@enduml
