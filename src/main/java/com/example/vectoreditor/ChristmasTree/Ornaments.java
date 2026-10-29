@@ -30,11 +30,11 @@ public class Ornaments extends TreeDecorator {
             double[] t = tiers[rnd.nextInt(tiers.length)];
             double cx = t[0], topY = t[1];
             double baseLeftX = t[2], baseY = t[3];
-            double baseRightX = 2 * cx - baseLeftX;   // симметрично
+            double baseRightX = 2 * cx - baseLeftX;
             double height = baseY - topY;
 
             double x, y;
-            // rejection sampling: точка внутри треугольника
+
             do {
                 x = cx + (rnd.nextDouble() * 2 - 1) * (cx - baseLeftX);
                 y = topY + rnd.nextDouble() * height;
